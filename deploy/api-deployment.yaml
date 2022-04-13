@@ -1,42 +1,36 @@
 #########################################################
-# Service for Moleculer API Gateway service
+# Service for API
 #########################################################
 apiVersion: v1
 kind: Service
 metadata:
   name: api
-  namespace: __DEPLOYMENT_NAMESPACE__
+  namespace: mahmoud-test
   labels:
     name: api
-    environment: __DEPLOYMENT_NAMESPACE__
-    app: __APP_NAME__
-  annotations:
-    cloud.google.com/backend-config: '{"ports": {"3000":"my-backendconfig"}}'
 spec:
   selector:
     app: api
   ports:
-    - port: 3000
-      targetPort: 3000
+    - port: 8080
+      targetPort: 8080
   type: NodePort
 ---
 #########################################################
-# API Gateway service
+# Deployment for API 
 #########################################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api
-  namespace: __DEPLOYMENT_NAMESPACE__
+  namespace: mahmoud-test
   labels:
     name: api
-    environment: __DEPLOYMENT_NAMESPACE__
-    app: __APP_NAME__
 spec:
   selector:
     matchLabels:
       app: api
-  replicas: __API_DEPLOYMENT_REPLICA__
+  replicas: 1
   template:
     metadata:
       labels:
@@ -44,21 +38,6 @@ spec:
     spec:
       containers:
         - name: api
-          image: gcr.io/__PROJECT_ID__/__PROJECT_IMAGE__
-          envFrom:
-            - configMapRef:
-                name: __ENV_NAME__
-            - secretRef:
-                name: __SECRET_NAME__
-          env:
-            - name: SERVICES
-              value: api
-          resources:
-            limits:
-              cpu: __API_CPU_LIMT__
-              memory: __API_RAM_LIMT__
-            requests:
-              cpu: __API_CPU_REQUEST__
-              memory: __API_RAM_REQUEST__
+          image: mhm0ud/springboot:latest
 ---
 
