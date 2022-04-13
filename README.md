@@ -1,13 +1,13 @@
 Hello World sample shows how to deploy [SpringBoot](http://projects.spring.io/spring-boot/) Hello World application with [Docker](https://www.docker.com/), Kubernetes, CI/CD using Github Actions.
 
-#### Prerequisite 
+## Prerequisite 
 
 Installed:   
 [Docker](https://www.docker.com/)   
 [git](https://www.digitalocean.com/community/tutorials/how-to-contribute-to-open-source-getting-started-with-git)   
 
 
-#### Steps
+## Steps
 
 ##### Clone source code from git
 ```
@@ -38,12 +38,12 @@ the respone should be:
 Hello Mahmoud!
 ```
 
-#####  Stop Docker Container:
+##  Stop Docker Container:
 ```
 docker stop `docker container ls | grep "hello-world:*" | awk '{ print $1 }'`
 ```
 
-#####  Kubernetes files:
+##  Kubernetes files:
 Under deploy folder, we have two files that will deploy service, deployment, certificate, and ingress to a cluster
 
 #####  CI/CD:
